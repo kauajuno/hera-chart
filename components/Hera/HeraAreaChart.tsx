@@ -36,19 +36,25 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function HeraAreaChart() {
+export function HeraAreaChart(
+  {
+    hasFooter
+  } : {
+    hasFooter : boolean
+  }
+) {
   return (
     <Card className="h-full flex flex-col">
       <CardHeader className="shrink-0">
-        <CardTitle>Area Chart</CardTitle>
+        <CardTitle>Total de pão de queijo por mês</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Mostrando o total de pão de queijo consumido na Hera por mês
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 min-h-0 p-0"> {/* Key change here */}
+      <CardContent className="flex-1 min-h-0 p-0">
         <div className="h-full p-2 pt-0">
-          <ChartContainer config={chartConfig} className="h-full">
-            <ResponsiveContainer width="100%" height="100%">
+          <ChartContainer config={chartConfig} className="h-full w-full">
+            <ResponsiveContainer>
               <AreaChart
                 accessibilityLayer
                 data={chartData}
@@ -83,18 +89,20 @@ export function HeraAreaChart() {
           </ChartContainer>
         </div>
       </CardContent>
-      <CardFooter className="flex-shrink-0">
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="text-muted-foreground flex items-center gap-2 leading-none">
-              January - June 2024
+      {hasFooter && (
+        <CardFooter className="shrink-0">
+          <div className="flex w-full items-start gap-2 text-sm">
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2 leading-none font-medium">
+                Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="text-muted-foreground flex items-center gap-2 leading-none">
+                January - June 2024
+              </div>
             </div>
           </div>
-        </div>
-      </CardFooter>
+        </CardFooter>
+      )}
     </Card>
   )
 }

@@ -1,8 +1,9 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { HandCoins, Handshake, Home, Moon, Package, ShoppingBag, Sun } from "lucide-react"
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -11,36 +12,45 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+import { Button } from "../ui/button"
+
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Geral",
     url: "#",
     icon: Home,
   },
   {
-    title: "Inbox",
+    title: "Vendas",
     url: "#",
-    icon: Inbox,
+    icon: Handshake,
   },
   {
-    title: "Calendar",
+    title: "Caixa",
     url: "#",
-    icon: Calendar,
+    icon: HandCoins,
   },
   {
-    title: "Search",
+    title: "Compras x Vendas",
     url: "#",
-    icon: Search,
+    icon: ShoppingBag,
   },
   {
-    title: "Settings",
+    title: "Produtos",
     url: "#",
-    icon: Settings,
+    icon: Package,
   },
 ]
 
-export function HeraSidebar() {
+
+
+export function HeraSidebar({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+  function handleTheme() {
+    setDarkMode(!darkMode)
+  }
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -52,7 +62,7 @@ export function HeraSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon />
+                      <item.icon style={{ width: '24px', height: '24px' }} />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -62,6 +72,11 @@ export function HeraSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <Button onClick={handleTheme}>
+          {darkMode ? <Sun /> : <Moon />}
+        </Button>
+      </SidebarFooter>
     </Sidebar>
   )
 }
