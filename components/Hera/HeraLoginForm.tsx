@@ -9,7 +9,6 @@ import { toast } from 'sonner'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 
-
 export function HeraLoginForm() {
     const form = useForm<z.infer<typeof loginSchema>>({
         defaultValues: {
@@ -31,7 +30,7 @@ export function HeraLoginForm() {
 
     return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full flex flex-col gap-8">
-      <FieldGroup>
+      <FieldGroup className='flex flex-col gap-2'>
         <Controller
           name="email"
           control={form.control}

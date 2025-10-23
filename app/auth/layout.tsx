@@ -20,11 +20,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html>
       <body className={`h-screen overflow-hidden ${darkMode ? "dark" : ""}`}>
         <div className="grid grid-cols-4 gap-4 w-full h-dvh">
-            <div className='col-span-2 relative p-2 h-full box-border overflow-hidden'>
+            <div className='hidden md:block md:col-span-2 relative p-2 h-full box-border overflow-hidden'>
                 <img src="/images/blue-graphics-auth.jpg" className='rounded-2xl h-full w-full object-cover'></img>
             </div>
-            <div className='col-span-2'>{children}</div>
-            
+            <div className='col-span-4 md:col-span-2'>{children}</div>
         </div>
       </body>
     </html>
