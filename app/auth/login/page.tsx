@@ -1,46 +1,22 @@
-"use client"
-
+import { HeraLoginForm } from '@/components/Hera/HeraLoginForm'
+import Link from 'next/link'
 import React from 'react'
-import { Controller, useForm } from "react-hook-form"
-import { zodResolver } from '@hookform/resolvers/zod'
-import z from "zod"
-import { loginSchema } from "@/lib/schemas/auth"
-import { toast } from 'sonner'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
 
-
-function LoginForm() {
-    const form = useForm<z.infer<typeof loginSchema>>({
-        defaultValues: {
-            email: "",
-            senha: ""
-        },
-        resolver: zodResolver(loginSchema)
-    })
-
-    async function onSubmit(data: z.infer<typeof loginSchema>) {
-        form.reset()
-        toast.success("Login realizado com sucesso!", {
-            description: JSON.stringify(data, null, 2)
-        })
-    }
+function page() {
     return (
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-                <Controller
-                    name='email'
-                    control={form.control}
-                    render={({ field, fieldState }) => (
-                        <Field data-invalid={field.invalid}>
-                            <FieldLabel htmlFor={field.name}>E-mail</FieldLabel>
-                            <Input />
-                        </Field>
-                    )}
-                />
-            </FieldGroup>
-        </form>
+        <div className='h-full flex flex-col justify-between items-center px-12 py-[12dvh]'>
+            <div className='text-2xl font-bold w-full'>Heradash.</div>
+            <div className='w-full'>
+                <h1 className='text-5xl text-gray-950'>Olá,</h1>
+                <h1 className='text-5xl text-gray-950'>Bem-vindo de volta!</h1>
+                <p className='text-gray-500'>Insira suas credenciais para entrar no sistema.</p>
+            </div>
+            <HeraLoginForm />
+            <div className='w-full'>
+                <p>Esqueceu a senha? <Link className='text-blue-500' href={`/dashboard`}>Entre em contato com o suporte</Link></p>
+            </div>
+        </div>
     )
 }
 
-export default LoginForm
+export default page
